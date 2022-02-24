@@ -28,4 +28,9 @@ public class EnginServiceImp implements EnginService{
         return enginRepository.findAllEnginEntree();
 
     }
+
+    @Override
+    public void save(Engin engin) {
+        enginRepository.save(engin);
+    }
 }
