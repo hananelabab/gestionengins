@@ -6,21 +6,30 @@ import com.marsamaroc.gestionengins.entity.Engin;
 import com.marsamaroc.gestionengins.service.ControleService;
 import com.marsamaroc.gestionengins.service.EnginService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RestController
-@RequestMapping("/engin")
+//@RestController
+//@RequestMapping("/engin")
 public class EnginsController {
     @Autowired
     EnginService enginService;
     @Autowired
     ControleService controleService;
+
+    @PostMapping(value = "/addEngins")
+    List<Engin> addEnginList(@RequestBody List<Engin> enginList){
+        for(Engin engin : enginList){
+            enginService.save(engin);
+        }
+        return enginList;
+
+    }
+
+
+
     @GetMapping(value="/listeEnginsSortie")
     List<EnginSEDTO> listeEnginsSortie(){
         List<Engin> enginList = enginService.getEnginsSorties();
