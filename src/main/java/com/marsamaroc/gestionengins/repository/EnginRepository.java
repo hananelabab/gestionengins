@@ -27,4 +27,5 @@ public interface EnginRepository extends JpaRepository<Engin,String> {
             "where ea1.engin.codeEngin = ea.engin.codeEngin)" +
             "and ea.etat='e'")
     List<Engin> findAllEnginEntree();
+
 }

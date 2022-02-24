@@ -3,12 +3,13 @@ package com.marsamaroc.gestionengins.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 @Data
 @Entity
-public class EnginAffecte {
+public class EnginAffecte implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     Long idDemandeEngin;

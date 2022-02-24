@@ -3,12 +3,13 @@ package com.marsamaroc.gestionengins.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Data
-public class Demande {
+public class Demande implements Serializable {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

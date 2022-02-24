@@ -12,6 +12,5 @@ public interface EnginService {
     List<Engin> getEnginsSorties();
     List<Engin> getEnginsEntrees();
 
-
-
+    void save(Engin engin);
 }

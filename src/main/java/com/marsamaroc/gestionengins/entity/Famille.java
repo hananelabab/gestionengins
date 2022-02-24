@@ -5,11 +5,12 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.swing.*;
 import javax.swing.plaf.IconUIResource;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Data
-public class Famille {
+public class Famille implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     Long idFamille;
