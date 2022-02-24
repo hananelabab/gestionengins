@@ -4,12 +4,13 @@ package com.marsamaroc.gestionengins.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 @Data
 @Entity
-public class Engin {
+public class Engin implements Serializable {
     @Id
     String codeEngin;
     String typeEngin;
@@ -25,11 +26,15 @@ public class Engin {
 
 
     public EnginAffecte getDerniereAffectation(){
-        EnginAffecte dernierEnginAffecte = enginAffecteList.get(0);
-        for(EnginAffecte enginAffecteitm : enginAffecteList){
-            if(enginAffecteitm.getDateAffectation().compareTo(dernierEnginAffecte.getDateAffectation())>=1)
-                dernierEnginAffecte = enginAffecteitm;
+        EnginAffecte dernierEnginAffecte  = null;
+        if(enginAffecteList != null){
+            dernierEnginAffecte = enginAffecteList.get(0);
+            for(EnginAffecte enginAffecteitm : enginAffecteList){
+                if(enginAffecteitm.getDateAffectation().compareTo(dernierEnginAffecte.getDateAffectation())>=1)
+                    dernierEnginAffecte = enginAffecteitm;
+            }
         }
+
         return dernierEnginAffecte;
     }
 }
