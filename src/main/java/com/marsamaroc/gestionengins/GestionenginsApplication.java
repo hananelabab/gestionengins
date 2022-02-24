@@ -1,21 +1,19 @@
 package com.marsamaroc.gestionengins;
 
+import com.marsamaroc.gestionengins.repository.CritereRepository;
 import com.marsamaroc.gestionengins.service.DemandeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-@CrossOrigin("*")
 @SpringBootApplication
 public class GestionenginsApplication implements CommandLineRunner {
 
     @Autowired
-    DemandeService demandeService;
+    CritereRepository crtiterRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(GestionenginsApplication.class, args);
@@ -23,6 +21,7 @@ public class GestionenginsApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        //demandeService.findAllDemande();
+        System.out.println("test");
+        crtiterRepository.findAll();
     }
 }
