@@ -10,4 +10,6 @@ public interface EnginAffecteService {
     EnginAffecte saveEnginDemande(EnginAffecte enginAffecte);
     List<EnginAffecte> getAllAffectationByIdEngin(String id);
     EnginAffecte getById(Long id);
+
+    void delete(EnginAffecte enginAffecte);
 }
