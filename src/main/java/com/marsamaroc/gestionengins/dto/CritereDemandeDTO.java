@@ -13,6 +13,7 @@ public class CritereDemandeDTO {
     String observationEntree;
     char etatSortie;
     String observationSortie;
+    //
     
     public CritereDemandeDTO(Controle controle){
         this.idCritere = controle.getCritere().getIdCritere();
