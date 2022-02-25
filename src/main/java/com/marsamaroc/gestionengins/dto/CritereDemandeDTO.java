@@ -8,7 +8,7 @@ public class CritereDemandeDTO {
 
 
     Long idCritere;
-    String critere;
+    String nomCritere;
     char etatEntree;
     String observationEntree;
     char etatSortie;
@@ -16,7 +16,7 @@ public class CritereDemandeDTO {
     
     public CritereDemandeDTO(Controle controle){
         this.idCritere = controle.getCritere().getIdCritere();
-        this.critere = controle.getCritere().getNomCritere();
+        this.nomCritere = controle.getCritere().getNomCritere();
         this.etatEntree = controle.getEtatEntree();
         this.etatSortie = controle.getEtatSortie();
         this.observationEntree = controle.getObsEntree();
