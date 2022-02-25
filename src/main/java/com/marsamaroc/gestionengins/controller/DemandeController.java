@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+
 @RestController
 @RequestMapping("/demandes")
 public class DemandeController {
@@ -73,6 +73,14 @@ public class DemandeController {
 
     @PostMapping(value="/affecter")
     List<EnginAffecteeDTO> affecterEngins(@RequestBody List<EnginAffecte> enginAffecteList) {
+
+        //Delete if is not exist
+        List<EnginAffecte> enginAffecteListOld = demandeService.getById(enginAffecteList.get(0).getDemande().getNumBCI()).getEnginsAffecteList();
+        for(EnginAffecte enginAffecte : enginAffecteListOld){
+            if(!enginAffecteList.contains(enginAffecte))
+                enginAffecteService.delete(enginAffecte);
+        }
+        //Insert
         List<EnginAffecteeDTO>  enginAffecteeDTOList = new ArrayList<>();
         for (EnginAffecte enginAffecte : enginAffecteList) {
             enginAffecte.setDateAffectation(new Date());

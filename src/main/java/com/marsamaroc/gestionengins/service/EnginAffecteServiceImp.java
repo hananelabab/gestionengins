@@ -25,4 +25,9 @@ public class EnginAffecteServiceImp implements EnginAffecteService {
     public EnginAffecte getById(Long id) {
         return enginAffecteRepository.getById(id);
     }
+
+    @Override
+    public void delete(EnginAffecte enginAffecte) {
+        enginAffecteRepository.delete(enginAffecte);
+    }
 }
