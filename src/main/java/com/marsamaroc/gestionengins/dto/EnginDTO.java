@@ -15,6 +15,10 @@ public class EnginDTO {
     private String capacite;
     private Long compteur;
     private FamilleDTO famille;
+    private Long idDemandeEngin;
+
+    
+
     private List<CritereDemandeDTO> critere = new ArrayList<>();
 
     public EnginDTO(Engin engin, EnginAffecte enginAffecte){
@@ -22,6 +26,8 @@ public class EnginDTO {
         this.typeEngin = engin.getTypeEngin();
         this.capacite = engin.getCapacite();
         this.compteur = engin.getCompteur();
+        this.idDemandeEngin = enginAffecte.getIdDemandeEngin();
+
         Date dateDerniereAffectation=engin.getDerniereAffectation().getDateSortie() ;
 
         this.famille = new FamilleDTO(engin.getFamille(),dateDerniereAffectation);
