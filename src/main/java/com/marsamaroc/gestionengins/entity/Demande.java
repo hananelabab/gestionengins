@@ -25,6 +25,10 @@ public class Demande implements Serializable {
     @OneToMany(mappedBy = "demande")
     List<EnginAffecte> enginsAffecteList;
 
+    @ManyToOne
+    @JoinColumn(name = "demande_responsable")
+    private User user;
+
     public int getQuantite(){
         int totalEngin=0;
         for(DetailsDemande detailsDemande : this.getDetailsDemandeList())

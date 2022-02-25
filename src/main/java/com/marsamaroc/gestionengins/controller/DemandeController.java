@@ -35,7 +35,8 @@ public class DemandeController {
     ControleService controleService;
     @Autowired
     CritereService critereService;
-
+    @Autowired
+    UserService userService;
     @RequestMapping(value="/all",method= RequestMethod.GET)
     List<DemandeDTO> getAllDemande(){
         List<Demande> demandeList= demandeService.findAllDemande();
@@ -92,6 +93,14 @@ public class DemandeController {
     String controleEnginsAffecte(@RequestBody List<EnginAffecte> enginAffecteList){
         for(EnginAffecte newEnginAffecte : enginAffecteList) {
             EnginAffecte enginAffecte = enginAffecteService.getById(newEnginAffecte.getIdDemandeEngin());
+            User responsable = userService.saveUserIfNotExist(newEnginAffecte.getResponsableAffectation());
+            User conducteur = userService.saveUserIfNotExist(newEnginAffecte.getConducteur());
+            responsable.setType("Responsable");
+            responsable.setEnable('N');
+            conducteur.setEnable('N');
+            conducteur.setType("Conducteur");
+            enginAffecte.setResponsableAffectation(responsable);
+            enginAffecte.setConducteur(conducteur);
             if (newEnginAffecte.getControleEngin().get(0).getEtatEntree() != 0)
                 enginAffecte.setEtat(new Character('e'));
             else
