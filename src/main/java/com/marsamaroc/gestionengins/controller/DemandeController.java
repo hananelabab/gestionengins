@@ -47,9 +47,28 @@ public class DemandeController {
         return demandeDTOList;
     }
 
+    @RequestMapping(value="/enregistree",method= RequestMethod.GET)
+    List<DemandeDTO> getDemandeEnregistree(){
+        List<Demande> demandeList= demandeService.findAllDemandeEnregistree();
+        List<DemandeDTO> demandeDTOList = new ArrayList<>();
+        for(Demande demande : demandeList){
+            demandeDTOList.add(new DemandeDTO(demande));
+        }
+        return demandeDTOList;
+    }
+    @RequestMapping(value="/verifiee",method= RequestMethod.GET)
+    List<DemandeDTO> getDemandeVerifiee(){
+        List<Demande> demandeList= demandeService.findAllDemandeVerifiee();
+        List<DemandeDTO> demandeDTOList = new ArrayList<>();
+        for(Demande demande : demandeList){
+            demandeDTOList.add(new DemandeDTO(demande));
+        }
+        return demandeDTOList;
+    }
+
 
     @RequestMapping(value="/{id}",method= RequestMethod.GET)
-    DemandeCompletDTO getAllDemande(@PathVariable("id") String id ){
+    DemandeCompletDTO getDemande(@PathVariable("id") String id ){
         Demande demande = demandeService.getById(Long.parseLong(id));
         if(demande == null)
             return null;
@@ -93,14 +112,16 @@ public class DemandeController {
     String controleEnginsAffecte(@RequestBody List<EnginAffecte> enginAffecteList){
         for(EnginAffecte newEnginAffecte : enginAffecteList) {
             EnginAffecte enginAffecte = enginAffecteService.getById(newEnginAffecte.getIdDemandeEngin());
-            User responsable = userService.saveUserIfNotExist(newEnginAffecte.getResponsableAffectation());
-            User conducteur = userService.saveUserIfNotExist(newEnginAffecte.getConducteur());
-            responsable.setType("Responsable");
-            responsable.setEnable('N');
-            conducteur.setEnable('N');
-            conducteur.setType("Conducteur");
-            enginAffecte.setResponsableAffectation(responsable);
-            enginAffecte.setConducteur(conducteur);
+            if(newEnginAffecte.getConducteur() != null && newEnginAffecte.getResponsableAffectation()!=null){
+                User responsable = userService.saveUserIfNotExist(newEnginAffecte.getResponsableAffectation());
+                User conducteur = userService.saveUserIfNotExist(newEnginAffecte.getConducteur());
+                responsable.setType("Responsable");
+                responsable.setEnable('N');
+                conducteur.setEnable('N');
+                conducteur.setType("Conducteur");
+                enginAffecte.setResponsableAffectation(responsable);
+                enginAffecte.setConducteur(conducteur);
+            }
             if (newEnginAffecte.getControleEngin().get(0).getEtatEntree() != 0)
                 enginAffecte.setEtat(new Character('e'));
             else

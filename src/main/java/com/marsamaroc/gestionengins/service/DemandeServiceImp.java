@@ -40,4 +40,14 @@ public class DemandeServiceImp implements DemandeService {
     public Demande getById(Long id) {
         return demandeRepository.getById(id);
     }
+
+    @Override
+    public List<Demande> findAllDemandeEnregistree() {
+        return demandeRepository.findByEnginsAffecteListIsNull();
+    }
+
+    @Override
+    public List<Demande> findAllDemandeVerifiee() {
+        return demandeRepository.findByEnginsAffecteListIsNotNull();
+    }
 }

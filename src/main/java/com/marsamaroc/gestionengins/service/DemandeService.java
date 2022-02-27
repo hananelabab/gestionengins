@@ -10,4 +10,7 @@ public interface DemandeService {
     Demande saveDamande(Demande demande);
     Demande getById(Long id);
 
+    List<Demande> findAllDemandeEnregistree();
+
+    List<Demande> findAllDemandeVerifiee();
 }

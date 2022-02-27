@@ -9,4 +9,7 @@ import java.util.List;
 @Repository
 public interface DemandeRepository extends JpaRepository<Demande,Long> {
 
+    List<Demande> findByEnginsAffecteListIsNotNull();
+    List<Demande> findByEnginsAffecteListIsNull();
+
 }
