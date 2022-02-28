@@ -13,7 +13,7 @@ public class Demande implements Serializable {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    Long NumBCI;
+    Long numBCI;
     Date dateDemande;
     Date dateSortie;
     int shift;

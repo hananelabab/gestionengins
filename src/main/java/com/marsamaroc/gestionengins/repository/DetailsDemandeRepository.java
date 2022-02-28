@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DetailsDemandeRepository extends JpaRepository<DetailsDemande,Long> {
 
+    DetailsDemande findByDemande_NumBCIAndFamille_IdFamille(Long numBci , Long idFamille);
 }
