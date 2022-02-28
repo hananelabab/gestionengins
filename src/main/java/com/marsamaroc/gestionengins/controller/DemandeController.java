@@ -136,7 +136,7 @@ public class DemandeController {
         return "Done";
     }
     @PostMapping(value="/submit")
-    EnginAffecteeDTO submitDemande(@RequestBody EnginAffecte enginAffecte){
+    EnginAffecteeDTO submitDemandeSortie(@RequestBody EnginAffecte enginAffecte){
         EnginAffecte enginAffecteOld = enginAffecteService.getById(enginAffecte.getIdDemandeEngin());
         if(enginAffecte.getConducteur() != null && enginAffecte.getResponsableAffectation()!=null){
             enginAffecte.getResponsableAffectation().setType("Responsable");
@@ -155,6 +155,8 @@ public class DemandeController {
         enginAffecteService.saveEnginDemande(enginAffecteOld);
         return new EnginAffecteeDTO(enginAffecteOld);
     }
+
+
     @GetMapping(value="/{idDemande}/{idEngin}")
     EnginDTO ElisteEnginsEntree(@PathVariable("idEngin") String idEngin,
                                 @PathVariable("idDemande") String idDemande){
