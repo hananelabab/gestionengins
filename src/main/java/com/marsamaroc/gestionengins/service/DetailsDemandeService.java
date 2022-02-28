@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface DetailsDemandeService {
     void saveDetailDemandes(List<DetailsDemande> detailsDemande , Demande demande);
+    DetailsDemande getDetailsDemandeByNumBciAndIdFammille(Long numBci , Long idFamille);
 
 }

@@ -85,9 +85,9 @@ public class DemandeController {
 
     @PostMapping(value="/add")
     DemandeDTO addDemande(@RequestBody Demande demande) {
-        demande = demandeService.saveDamande(demande);
-        detailsDemandeService.saveDetailDemandes(demande.getDetailsDemandeList() , demande);
-        return  new DemandeDTO(demande);
+        Demande newDemande = demandeService.saveDamande(demande);
+        detailsDemandeService.saveDetailDemandes(demande.getDetailsDemandeList() , newDemande);
+        return  new DemandeDTO(newDemande);
     }
 
     @PostMapping(value="/affecter")
