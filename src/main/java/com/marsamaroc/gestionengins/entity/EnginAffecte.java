@@ -19,7 +19,7 @@ public class EnginAffecte implements Serializable {
     Demande demande;
     @OneToMany(mappedBy = "enginAffecte")
     List<Controle> controleEngin;
-    char etat;
+    char etat = 'p';
     @ManyToOne
     @JoinColumn(name = "id_engin")
     Engin engin;
