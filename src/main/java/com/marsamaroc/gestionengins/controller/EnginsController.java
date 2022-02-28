@@ -34,7 +34,6 @@ public class EnginsController {
     @GetMapping(value="/listeEnginsSortie")
     List<EnginSEDTO> listeEnginsSortie(){
         List<Engin> enginList = enginService.getEnginsSorties();
-
         List<EnginSEDTO> enginSEDTOList =new ArrayList<>();
         for (Engin engin : enginList)
             enginSEDTOList.add(new EnginSEDTO(engin , engin.getDerniereAffectation().getDateSortie() , "Sortie" ));
@@ -49,7 +48,7 @@ public class EnginsController {
         return enginSEDTOList;
     }
     @GetMapping(value="/{idEngin}")
-    EnginDTO ElisteEnginsEntree(@PathVariable("idEngin") String idEngin){
+    EnginDTO getEngin(@PathVariable("idEngin") String idEngin){
         Engin engin = enginService.getById(idEngin);
         EnginDTO enginDTO = new EnginDTO(engin, engin.getDerniereAffectation());
         return enginDTO;

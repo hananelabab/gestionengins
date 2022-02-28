@@ -18,6 +18,9 @@ public class Entite implements Serializable {
     @OneToMany(mappedBy="entite")
     List<Post> posts;
 
+    @OneToMany(mappedBy="entite")
+    List<User> userList;
+
 
 
 }

@@ -27,4 +27,12 @@ public class EnginAffecte implements Serializable {
     Date dateSortie;
     Date dateAffectation;
 
+    @ManyToOne
+    @JoinColumn(name = "affectation_responsable")
+    private User responsableAffectation;
+
+    @ManyToOne
+    @JoinColumn(name = "conducteur")
+    private User conducteur;
+
 }
