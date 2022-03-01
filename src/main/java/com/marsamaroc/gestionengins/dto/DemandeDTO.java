@@ -19,6 +19,9 @@ public class DemandeDTO {
     private String entite;
     private int totalEngins;
     private String statut;
+    private int nombreEntree;
+    private int nombreSortie;
+
 
     public DemandeDTO(Demande demande) {
         this.numBCI = demande.getNumBCI();
@@ -27,7 +30,9 @@ public class DemandeDTO {
         this.shift = demande.getShift();
         this.poste = demande.getPost().getCodePost();
         this.entite = demande.getPost().getEntite() == null ? null : demande.getPost().getEntite().getEntite();
-        this.totalEngins = demande.getQuantite();
+        this.totalEngins = demande.getNumberEnginAfectee();
+        this.nombreEntree = demande.getNumberEnginEntree();
+        this.nombreSortie = demande.getNumberEnginSortie();
         this.statut = demande.getStatut();
     }
     private Demande toEntity(){

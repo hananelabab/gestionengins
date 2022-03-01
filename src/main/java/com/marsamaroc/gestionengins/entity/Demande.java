@@ -35,6 +35,12 @@ public class Demande implements Serializable {
             totalEngin+= detailsDemande.getQuantite();
         return totalEngin;
     }
+    public int getNumberEnginAfectee(){
+        int totalEngin=0;
+        for(EnginAffecte detailsDemande : enginsAffecteList)
+            totalEngin++;
+        return totalEngin;
+    }
     public String getStatut(){
         if(this.enginsAffecteList == null)
             return "Enregistée";
@@ -50,5 +56,21 @@ public class Demande implements Serializable {
 
         return null;
 
+    }
+    public int getNumberEnginEntree(){
+        int nombre = 0;
+        if(enginsAffecteList!=null)
+            for(EnginAffecte enginAffecte : enginsAffecteList)
+                if(enginAffecte.getEtat()=='e')
+                    nombre++;
+        return nombre;
+    }
+    public int getNumberEnginSortie(){
+        int nombre = 0;
+        if(enginsAffecteList!=null)
+            for(EnginAffecte enginAffecte : enginsAffecteList)
+                if(enginAffecte.getEtat()=='s')
+                    nombre++;
+        return nombre;
     }
 }
