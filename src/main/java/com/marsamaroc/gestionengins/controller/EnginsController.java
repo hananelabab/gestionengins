@@ -28,9 +28,7 @@ public class EnginsController {
         return enginList;
 
     }
-
-
-
+    
     @GetMapping(value="/listeEnginsSortie")
     List<EnginSEDTO> listeEnginsSortie(){
         List<Engin> enginList = enginService.getEnginsSorties();

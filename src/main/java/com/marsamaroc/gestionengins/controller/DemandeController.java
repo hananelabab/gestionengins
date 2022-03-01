@@ -6,9 +6,11 @@ import com.marsamaroc.gestionengins.dto.EnginAffecteeDTO;
 import com.marsamaroc.gestionengins.dto.EnginDTO;
 import com.marsamaroc.gestionengins.entity.*;
 import com.marsamaroc.gestionengins.service.*;
+import net.minidev.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.Console;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -113,20 +115,6 @@ public class DemandeController {
     String controleEnginsAffecte(@RequestBody List<EnginAffecte> enginAffecteList){
         for(EnginAffecte newEnginAffecte : enginAffecteList) {
             EnginAffecte enginAffecte = enginAffecteService.getById(newEnginAffecte.getIdDemandeEngin());
-            if(newEnginAffecte.getConducteur() != null && newEnginAffecte.getResponsableAffectation()!=null){
-                User responsable = userService.saveUserIfNotExist(newEnginAffecte.getResponsableAffectation());
-                User conducteur = userService.saveUserIfNotExist(newEnginAffecte.getConducteur());
-                responsable.setType("Responsable");
-                responsable.setEnable('N');
-                conducteur.setEnable('N');
-                conducteur.setType("Conducteur");
-                enginAffecte.setResponsableAffectation(responsable);
-                enginAffecte.setConducteur(conducteur);
-            }
-            if (newEnginAffecte.getControleEngin().get(0).getEtatEntree() != 0)
-                enginAffecte.setEtat(new Character('e'));
-            else
-                enginAffecte.setEtat(new Character('s'));
             if(enginAffecte.getControleEngin().isEmpty()){
                 //Insert
                 for (Controle controle : newEnginAffecte.getControleEngin()){
@@ -148,6 +136,28 @@ public class DemandeController {
 
         return "Done";
     }
+    @PostMapping(value="/submit")
+    EnginAffecteeDTO submitDemandeSortie(@RequestBody EnginAffecte enginAffecte){
+        EnginAffecte enginAffecteOld = enginAffecteService.getById(enginAffecte.getIdDemandeEngin());
+        if(enginAffecte.getConducteur() != null && enginAffecte.getResponsableAffectation()!=null){
+            enginAffecte.getResponsableAffectation().setType("Responsable");
+            enginAffecte.getResponsableAffectation().setEnable('N');
+            enginAffecte.getConducteur().setEnable('N');
+            enginAffecte.getConducteur().setType("Conducteur");
+            User responsable = userService.saveUserIfNotExist(enginAffecte.getResponsableAffectation());
+            User conducteur = userService.saveUserIfNotExist(enginAffecte.getConducteur());
+            enginAffecteOld.setResponsableAffectation(responsable);
+            enginAffecteOld.setConducteur(conducteur);
+        }
+        if (enginAffecteOld.getControleEngin().get(0).getEtatEntree() != 0)
+            enginAffecte.setEtat(new Character('e'));
+        else
+            enginAffecteOld.setEtat(new Character('s'));
+        enginAffecteService.saveEnginDemande(enginAffecteOld);
+        return new EnginAffecteeDTO(enginAffecteOld);
+    }
+
+
     @GetMapping(value="/{idDemande}/{idEngin}")
     EnginDTO ElisteEnginsEntree(@PathVariable("idEngin") String idEngin,
                                 @PathVariable("idDemande") String idDemande){

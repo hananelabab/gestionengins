@@ -19,7 +19,6 @@ public interface EnginRepository extends JpaRepository<Engin,String> {
             "and ea.etat='s'")
     List<Engin> findAllEnginSortie();
 
-
     @Query("select e from Engin e , EnginAffecte ea " +
             "where ea.engin.codeEngin= e.codeEngin " +
             "and ea.dateSortie = (" +
