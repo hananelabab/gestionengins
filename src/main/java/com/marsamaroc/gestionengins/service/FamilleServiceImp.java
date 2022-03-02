@@ -15,4 +15,15 @@ public class FamilleServiceImp implements FamilleService {
     public Famille getById(Long id) {
         return familleRepository.getById(id);
     }
+
+    @Override
+    public Famille saveFamille(Famille famille) {
+        return familleRepository.save(famille);
+    }
+
+
+    @Override
+    public Famille getFamilleByName(String nomFamille) {
+        return familleRepository.findByNomFamille(nomFamille);
+    }
 }

@@ -3,8 +3,10 @@ package com.marsamaroc.gestionengins.controller;
 import com.marsamaroc.gestionengins.dto.EnginDTO;
 import com.marsamaroc.gestionengins.dto.EnginSEDTO;
 import com.marsamaroc.gestionengins.entity.Engin;
+import com.marsamaroc.gestionengins.entity.Famille;
 import com.marsamaroc.gestionengins.service.ControleService;
 import com.marsamaroc.gestionengins.service.EnginService;
+import com.marsamaroc.gestionengins.service.FamilleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,15 +22,23 @@ public class EnginsController {
     @Autowired
     ControleService controleService;
 
+    @Autowired
+    FamilleService familleService;
     @PostMapping(value = "/addEngins")
     List<Engin> addEnginList(@RequestBody List<Engin> enginList){
+        Famille famille_Old;
         for(Engin engin : enginList){
+            famille_Old = familleService.getFamilleByName(engin.getFamille().getNomFamille());
+            if(famille_Old == null)
+                engin.setFamille(familleService.saveFamille(engin.getFamille()));
+            engin.getFamille().setEngin(null);
             enginService.save(engin);
         }
         return enginList;
-
     }
-    
+
+
+
     @GetMapping(value="/listeEnginsSortie")
     List<EnginSEDTO> listeEnginsSortie(){
         List<Engin> enginList = enginService.getEnginsSorties();

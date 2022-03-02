@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface FamilleRepository extends JpaRepository<Famille, Long> {
 
+    Famille findByNomFamille(String nomFamiile);
 }

@@ -36,10 +36,9 @@ public class Demande implements Serializable {
         return totalEngin;
     }
     public int getNumberEnginAfectee(){
-        int totalEngin=0;
-        for(EnginAffecte detailsDemande : enginsAffecteList)
-            totalEngin++;
-        return totalEngin;
+        if(enginsAffecteList != null)
+            return enginsAffecteList.size();
+        return 0;
     }
     public String getStatut(){
         if(this.enginsAffecteList == null)
