@@ -142,6 +142,7 @@ public class DemandeController {
         if(enginAffecte.getConducteur() != null && enginAffecte.getResponsableAffectation()!=null){
             enginAffecte.getResponsableAffectation().setType("Responsable");
             enginAffecte.getResponsableAffectation().setEnable('N');
+            enginAffecte.getConducteur().setEntite(enginAffecte.getDemande().getPost().getEntite());
             enginAffecte.getConducteur().setEnable('N');
             enginAffecte.getConducteur().setType("Conducteur");
             User responsable = userService.saveUserIfNotExist(enginAffecte.getResponsableAffectation());

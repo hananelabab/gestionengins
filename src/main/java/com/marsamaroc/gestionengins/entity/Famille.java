@@ -1,10 +1,7 @@
 package com.marsamaroc.gestionengins.entity;
 
 import lombok.Data;
-
 import javax.persistence.*;
-import javax.swing.*;
-import javax.swing.plaf.IconUIResource;
 import java.io.Serializable;
 import java.util.List;
 
@@ -16,6 +13,7 @@ public class Famille implements Serializable {
     Long idFamille;
     String nomFamille;
     String icon;
+    String codeFamille;
 
     @OneToMany(mappedBy="famille")
     List<Engin> engin;
