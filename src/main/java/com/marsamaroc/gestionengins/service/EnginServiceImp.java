@@ -33,4 +33,17 @@ public class EnginServiceImp implements EnginService{
     public void save(Engin engin) {
         enginRepository.save(engin);
     }
+
+	@Override
+	public List<Engin> getAll() {
+		// TODO Auto-generated method stub
+		return enginRepository.findAll();
+	}
+
+	@Override
+	public List<Engin> getEnginsEntreesByFamille(Long famille) {
+		// TODO Auto-generated method stub
+		
+		return enginRepository.findAllEnginEntreeByFamille(famille);
+	}
 }

@@ -9,8 +9,10 @@ import java.util.List;
 public interface EnginService {
     Engin getById(String id);
 
+    List<Engin> getAll();
     List<Engin> getEnginsSorties();
     List<Engin> getEnginsEntrees();
+    List<Engin> getEnginsEntreesByFamille(Long Famille);
 
     void save(Engin engin);
 }

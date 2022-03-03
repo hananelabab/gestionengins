@@ -16,6 +16,10 @@ public class EnginDTO {
     private Long compteur;
     private FamilleDTO famille;
     private Long idDemandeEngin;
+
+    private UserDTO conducteur;
+    private UserDTO responsable;
+
     //
 
     
@@ -32,6 +36,8 @@ public class EnginDTO {
         Date dateDerniereAffectation=engin.getDerniereAffectation().getDateSortie() ;
 
         this.famille = new FamilleDTO(engin.getFamille(),dateDerniereAffectation);
+        this.conducteur =enginAffecte.getConducteur() == null ? null :  new UserDTO(enginAffecte.getConducteur());
+        this.responsable =enginAffecte.getResponsableAffectation() == null ? null :  new UserDTO(enginAffecte.getResponsableAffectation()); 
 
         if(enginAffecte.getControleEngin() == null) enginAffecte.setControleEngin(new ArrayList<>()) ;
         for (Controle controle : enginAffecte.getControleEngin())

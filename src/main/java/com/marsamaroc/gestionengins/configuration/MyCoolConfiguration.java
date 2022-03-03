@@ -1,6 +1,8 @@
 package com.marsamaroc.gestionengins.configuration;
 
 import com.marsamaroc.gestionengins.entity.Critere;
+import com.marsamaroc.gestionengins.entity.Engin;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +18,8 @@ public class MyCoolConfiguration  {
     @Bean
     public void init() {
         restConfiguration.exposeIdsFor(Critere.class);
+        restConfiguration.exposeIdsFor(Engin.class);
+
     }
 
 
