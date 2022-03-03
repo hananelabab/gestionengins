@@ -21,7 +21,7 @@ public class UserDTO {
 	     char enable;
 	     String type;
 	    
-
+//-----
     
 	public UserDTO(User user){
         this.id = user.getId();
