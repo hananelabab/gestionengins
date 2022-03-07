@@ -17,6 +17,7 @@ public class EnginDTO {
     private FamilleDTO famille;
     private Long idDemandeEngin;
 
+
     private UserDTO conducteur;
     private UserDTO responsable;
 
@@ -31,16 +32,16 @@ public class EnginDTO {
         this.typeEngin = engin.getTypeEngin();
         this.capacite = engin.getCapacite();
         this.compteur = engin.getCompteur();
-        this.idDemandeEngin = enginAffecte.getIdDemandeEngin();
-
-        Date dateDerniereAffectation=engin.getDerniereAffectation().getDateSortie() ;
-
+        this.idDemandeEngin = enginAffecte!= null ? enginAffecte.getIdDemandeEngin() : null;
+        Date dateDerniereAffectation=  engin.getDerniereAffectation()!=null ? engin.getDerniereAffectation().getDateSortie():null ;
         this.famille = new FamilleDTO(engin.getFamille(),dateDerniereAffectation);
-        this.conducteur =enginAffecte.getConducteur() == null ? null :  new UserDTO(enginAffecte.getConducteur());
-        this.responsable =enginAffecte.getResponsableAffectation() == null ? null :  new UserDTO(enginAffecte.getResponsableAffectation()); 
+        if(enginAffecte != null){
+            this.conducteur =enginAffecte.getConducteur() == null ? null :  new UserDTO(enginAffecte.getConducteur());
+            this.responsable =enginAffecte.getResponsableAffectation() == null ? null :  new UserDTO(enginAffecte.getResponsableAffectation());
+            if(enginAffecte.getControleEngin() == null) enginAffecte.setControleEngin(new ArrayList<>()) ;
+            for (Controle controle : enginAffecte.getControleEngin())
+                this.critere.add(new CritereDemandeDTO(controle));
+        }
 
-        if(enginAffecte.getControleEngin() == null) enginAffecte.setControleEngin(new ArrayList<>()) ;
-        for (Controle controle : enginAffecte.getControleEngin())
-            this.critere.add(new CritereDemandeDTO(controle));
     }
 }

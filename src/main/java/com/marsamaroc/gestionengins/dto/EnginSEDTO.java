@@ -1,6 +1,8 @@
 package com.marsamaroc.gestionengins.dto;
 
 import com.marsamaroc.gestionengins.entity.Engin;
+import com.marsamaroc.gestionengins.enums.EtatAffectation;
+import com.marsamaroc.gestionengins.enums.EtatEngin;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -16,8 +18,8 @@ public class EnginSEDTO {
     private Long compteur;
     private String famille;
     private Date dateDernierAffectation;
-    private String etat;
-    public EnginSEDTO(Engin engin, Date dateDernierAffectation,String etat ){
+    private EtatAffectation etat;
+    public EnginSEDTO(Engin engin, Date dateDernierAffectation, EtatAffectation etat ){
         this.codeEngin = engin.getCodeEngin();
         this.typeEngin = engin.getTypeEngin() ;
         this.capacite = engin.getCapacite();

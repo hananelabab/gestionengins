@@ -1,5 +1,7 @@
 package com.marsamaroc.gestionengins.entity;
 
+import com.marsamaroc.gestionengins.enums.EtatAffectation;
+import com.marsamaroc.gestionengins.enums.EtatEngin;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -64,7 +66,7 @@ public class Demande implements Serializable {
         int nombre = 0;
         if(enginsAffecteList!=null)
             for(EnginAffecte enginAffecte : enginsAffecteList)
-                if(enginAffecte.getEtat()=='e')
+                if(enginAffecte.getEtat()== EtatAffectation.execute)
                     nombre++;
         return nombre;
     }
@@ -72,7 +74,15 @@ public class Demande implements Serializable {
         int nombre = 0;
         if(enginsAffecteList!=null)
             for(EnginAffecte enginAffecte : enginsAffecteList)
-                if(enginAffecte.getEtat()=='s')
+                if(enginAffecte.getEtat() == EtatAffectation.enexecution)
+                    nombre++;
+        return nombre;
+    }
+    public int getNumberEnginReserve(){
+        int nombre = 0;
+        if(enginsAffecteList!=null)
+            for(EnginAffecte enginAffecte : enginsAffecteList)
+                if(enginAffecte.getEtat() == EtatAffectation.reserve)
                     nombre++;
         return nombre;
     }

@@ -1,6 +1,7 @@
 package com.marsamaroc.gestionengins.entity;
 
 
+import com.marsamaroc.gestionengins.enums.EtatEngin;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -16,12 +17,12 @@ public class Engin implements Serializable {
     String typeEngin;
     String capacite;
     Long compteur;
-    public Famille get_Famille() {
-    	return this.famille;
-    }
     @ManyToOne
     @JoinColumn(name = "id_famille")
     Famille famille;
+
+    @Enumerated(EnumType.STRING)
+    EtatEngin etat = EtatEngin.disponible;
 
     @OneToMany(mappedBy = "engin")
     List<EnginAffecte> enginAffecteList;
@@ -30,14 +31,12 @@ public class Engin implements Serializable {
     public EnginAffecte getDerniereAffectation(){
         EnginAffecte dernierEnginAffecte  = null;
         if(!enginAffecteList.isEmpty()){
-        	
             dernierEnginAffecte = enginAffecteList.get(0);
             for(EnginAffecte enginAffecteitm : enginAffecteList){
                 if(enginAffecteitm.getDateAffectation().compareTo(dernierEnginAffecte.getDateAffectation())>=1)
                     dernierEnginAffecte = enginAffecteitm;
             }
         }
-
         return dernierEnginAffecte;
     }
 }

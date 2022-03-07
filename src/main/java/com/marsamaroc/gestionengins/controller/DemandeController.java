@@ -5,14 +5,13 @@ import com.marsamaroc.gestionengins.dto.DemandeCompletDTO;
 import com.marsamaroc.gestionengins.dto.EnginAffecteeDTO;
 import com.marsamaroc.gestionengins.dto.EnginDTO;
 import com.marsamaroc.gestionengins.entity.*;
+import com.marsamaroc.gestionengins.enums.EtatAffectation;
+import com.marsamaroc.gestionengins.enums.EtatEngin;
 import com.marsamaroc.gestionengins.service.*;
-import net.minidev.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.Console;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -106,7 +105,11 @@ public class DemandeController {
         List<EnginAffecteeDTO>  enginAffecteeDTOList = new ArrayList<>();
         for (EnginAffecte enginAffecte : enginAffecteList) {
             enginAffecte.setDateAffectation(new Date());
+            enginAffecte.setEtat(EtatAffectation.reserve);
+            enginAffecte.setEngin(enginService.getById(enginAffecte.getEngin().getCodeEngin()));
+            enginAffecte.getEngin().setEtat(EtatEngin.occupee);
             enginAffecteeDTOList.add(new EnginAffecteeDTO(enginAffecteService.saveEnginDemande(enginAffecte)));
+            enginService.save(enginAffecte.getEngin());
         }
         return enginAffecteeDTOList;
     }
@@ -121,6 +124,7 @@ public class DemandeController {
                     controle.setEnginAffecte(newEnginAffecte);
                     controleService.save(controle);
                     }
+                enginAffecte.setEtat(EtatAffectation.reserve);
                 }else{
                 //Modify
                 Controle newControle;
@@ -142,7 +146,7 @@ public class DemandeController {
         if(enginAffecte.getConducteur() != null && enginAffecte.getResponsableAffectation()!=null){
             enginAffecte.getResponsableAffectation().setType("Responsable");
             enginAffecte.getResponsableAffectation().setEnable('N');
-            enginAffecte.getConducteur().setEntite(enginAffecte.getDemande().getPost().getEntite());
+            enginAffecte.getConducteur().setEntite(enginAffecteOld.getDemande().getPost().getEntite());
             enginAffecte.getConducteur().setEnable('N');
             enginAffecte.getConducteur().setType("Conducteur");
             User responsable = userService.saveUserIfNotExist(enginAffecte.getResponsableAffectation());
@@ -150,21 +154,22 @@ public class DemandeController {
             enginAffecteOld.setResponsableAffectation(responsable);
             enginAffecteOld.setConducteur(conducteur);
         }
-        if (enginAffecteOld.getControleEngin().get(0).getEtatEntree() != 0)
-            enginAffecte.setEtat(new Character('e'));
+        if (enginAffecteOld.getControleEngin().get(0).getEtatEntree() != 0){
+            enginAffecte.setEtat(EtatAffectation.execute);
+            enginAffecteOld.getEngin().setEtat(EtatEngin.occupee);
+        }
         else
-            enginAffecteOld.setEtat(new Character('s'));
+            enginAffecteOld.setEtat(EtatAffectation.enexecution);
         enginAffecteService.saveEnginDemande(enginAffecteOld);
+        enginService.save(enginAffecteOld.getEngin());
         return new EnginAffecteeDTO(enginAffecteOld);
     }
 
 
     @GetMapping(value="/{idDemande}/{idEngin}")
-    EnginDTO ElisteEnginsEntree(@PathVariable("idEngin") String idEngin,
-                                @PathVariable("idDemande") String idDemande){
+    EnginDTO ElisteEnginsEntree(@PathVariable("idEngin") String idEngin, @PathVariable("idDemande") String idDemande){
         Engin engin = enginService.getById(idEngin);
         Demande demande = demandeService.getById(Long.parseLong(idDemande));
-
         EnginDTO enginDTO = new EnginDTO(engin,demande.getEnginAffecte(idEngin));
         return enginDTO;
     }

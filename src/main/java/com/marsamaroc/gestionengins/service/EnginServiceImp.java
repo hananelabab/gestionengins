@@ -20,13 +20,12 @@ public class EnginServiceImp implements EnginService{
 
     @Override
     public List<Engin> getEnginsSorties() {
-        return enginRepository.findAllEnginSortie();
+        return enginRepository.findAllEnginAffecteAndPreSortie();
     }
 
     @Override
     public List<Engin> getEnginsEntrees() {
-        return enginRepository.findAllEnginEntree();
-
+        return enginRepository.findAllEnginSortie();
     }
 
     @Override

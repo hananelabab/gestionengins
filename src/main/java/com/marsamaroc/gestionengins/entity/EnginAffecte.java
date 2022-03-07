@@ -1,5 +1,6 @@
 package com.marsamaroc.gestionengins.entity;
 
+import com.marsamaroc.gestionengins.enums.EtatAffectation;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -19,7 +20,8 @@ public class EnginAffecte implements Serializable {
     Demande demande;
     @OneToMany(mappedBy = "enginAffecte")
     List<Controle> controleEngin;
-    char etat = 'p';
+    @Enumerated(EnumType.STRING)
+    EtatAffectation etat = EtatAffectation.enexecution;
     @ManyToOne
     @JoinColumn(name = "id_engin")
     Engin engin;
