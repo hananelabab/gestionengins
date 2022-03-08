@@ -16,20 +16,12 @@ import java.util.List;
 public interface EnginRepository extends JpaRepository<Engin,String> {
 
 
-    @Query("select e from Engin e , EnginAffecte ea " +
-            "where ea.engin.codeEngin= e.codeEngin " +
-            "and ea.dateAffectation = (" +
-            "SELECT max(ea1.dateAffectation) from EnginAffecte ea1 " +
-            "where ea1.engin.codeEngin = e.codeEngin)" +
-            "and (ea.etat = 'affecte' or ea.etat ='presortie')")
+    @Query("select e from Engin e "+
+            "where e.etat = '"+EtatEngin.occupee_value+"'")
     List<Engin> findAllEnginAffecteAndPreSortie();
 
-    @Query("select e from Engin e , EnginAffecte ea " +
-            "where ea.engin.codeEngin= e.codeEngin " +
-            "and ea.dateAffectation = (" +
-            "SELECT max(ea1.dateAffectation) from EnginAffecte ea1 " +
-            "where ea1.engin.codeEngin = ea.engin.codeEngin)" +
-            "and ea.etat='sortie'")
+    @Query("select e from Engin e "+
+            "where e.etat = '"+EtatEngin.disponible_value+"'")
     List<Engin> findAllEnginSortie();
     
     @Query("select e from Engin e"+

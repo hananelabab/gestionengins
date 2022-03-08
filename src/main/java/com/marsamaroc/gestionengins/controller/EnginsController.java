@@ -52,8 +52,10 @@ public class EnginsController {
     List<EnginSEDTO> listeEnginsSortie(){
         List<Engin> enginList = enginService.getEnginsSorties();
         List<EnginSEDTO> enginSEDTOList =new ArrayList<>();
-        for (Engin engin : enginList)
-            enginSEDTOList.add(new EnginSEDTO(engin , engin.getDerniereAffectation()!=null ? engin.getDerniereAffectation().getDateSortie() : null,engin.getDerniereAffectation().getEtat() ));
+        for (Engin engin : enginList){
+            enginSEDTOList.add(new EnginSEDTO(engin));
+        }
+
         return enginSEDTOList;
     }
     @GetMapping(value="/listeEnginsEntree")
@@ -61,7 +63,7 @@ public class EnginsController {
         List<Engin> enginList = enginService.getEnginsEntrees();
         List<EnginSEDTO> enginSEDTOList =new ArrayList<>();
         for (Engin engin : enginList)
-            enginSEDTOList.add(new EnginSEDTO(engin , engin.getDerniereAffectation().getDateSortie() , engin.getDerniereAffectation().getEtat() ));
+            enginSEDTOList.add(new EnginSEDTO(engin));
         return enginSEDTOList;
     }
     @GetMapping(value="/listeEnginsDisponible/{famille}")
