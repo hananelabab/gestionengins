@@ -1,6 +1,7 @@
 package com.marsamaroc.gestionengins.service;
 
 import com.marsamaroc.gestionengins.entity.Controle;
+import com.marsamaroc.gestionengins.entity.EnginAffecte;
 import com.marsamaroc.gestionengins.repository.ControleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,8 @@ public class ControleServiceImp implements ControleService{
     }
 
     @Override
-    public void save(Controle controle) {
+    public void save(Controle controle, EnginAffecte enginAffecte) {
+        controle.setEnginAffecte(enginAffecte);
         controleRepository.save(controle);
     }
 

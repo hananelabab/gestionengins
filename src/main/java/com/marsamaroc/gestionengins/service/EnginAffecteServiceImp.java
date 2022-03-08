@@ -1,5 +1,7 @@
 package com.marsamaroc.gestionengins.service;
 
+import com.marsamaroc.gestionengins.entity.Demande;
+import com.marsamaroc.gestionengins.entity.Engin;
 import com.marsamaroc.gestionengins.entity.EnginAffecte;
 import com.marsamaroc.gestionengins.repository.EnginAffecteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,8 @@ public class EnginAffecteServiceImp implements EnginAffecteService {
     EnginAffecteRepository enginAffecteRepository;
     @Override
     public EnginAffecte saveEnginDemande(EnginAffecte enginAffecte) {
+        EnginAffecte oldEnginAffect =  getByEnginAndDemande(enginAffecte.getEngin(),enginAffecte.getDemande());
+        enginAffecte.setIdDemandeEngin(oldEnginAffect==null ? null : oldEnginAffect.getIdDemandeEngin());
         return enginAffecteRepository.save(enginAffecte);
     }
 
@@ -24,6 +28,11 @@ public class EnginAffecteServiceImp implements EnginAffecteService {
     @Override
     public EnginAffecte getById(Long id) {
         return enginAffecteRepository.getById(id);
+    }
+
+    @Override
+    public EnginAffecte getByEnginAndDemande(Engin engin, Demande demande) {
+        return enginAffecteRepository.findByEnginCodeEnginAndDemandeNumBCI(engin.getCodeEngin(),demande.getNumBCI());
     }
 
     @Override

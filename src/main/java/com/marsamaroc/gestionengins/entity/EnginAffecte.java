@@ -21,7 +21,7 @@ public class EnginAffecte implements Serializable {
     @OneToMany(mappedBy = "enginAffecte")
     List<Controle> controleEngin;
     @Enumerated(EnumType.STRING)
-    EtatAffectation etat = EtatAffectation.enexecution;
+    EtatAffectation etat = EtatAffectation.reserve;
     @ManyToOne
     @JoinColumn(name = "id_engin")
     Engin engin;

@@ -30,7 +30,7 @@ public class EnginsController {
         for(Engin engin : enginList){
             famille_Old = familleService.getFamilleByName(engin.getFamille().getNomFamille());
             if(famille_Old == null)
-                engin.setFamille(familleService.saveFamille(engin.getFamille()));
+                famille_Old = familleService.saveFamille(engin.getFamille());
             engin.setFamille(famille_Old);
             engin.getFamille().setEngin(null);
             enginService.save(engin);

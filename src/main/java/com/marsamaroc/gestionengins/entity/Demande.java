@@ -11,7 +11,7 @@ import java.util.List;
 
 @Entity
 @Data
-public class Demande implements Serializable {
+public class  Demande implements Serializable {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

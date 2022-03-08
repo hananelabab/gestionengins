@@ -29,13 +29,14 @@ public class Engin implements Serializable {
 
 
     public EnginAffecte getDerniereAffectation(){
-        EnginAffecte dernierEnginAffecte  = null;
-        if(!enginAffecteList.isEmpty()){
-            dernierEnginAffecte = enginAffecteList.get(0);
+        EnginAffecte dernierEnginAffecte = null;
+        if(enginAffecteList!=null){
+            dernierEnginAffecte = enginAffecteList.isEmpty() ? null : enginAffecteList.get(0);
             for(EnginAffecte enginAffecteitm : enginAffecteList){
                 if(enginAffecteitm.getDateAffectation().compareTo(dernierEnginAffecte.getDateAffectation())>=1)
                     dernierEnginAffecte = enginAffecteitm;
             }
+            return null;
         }
         return dernierEnginAffecte;
     }

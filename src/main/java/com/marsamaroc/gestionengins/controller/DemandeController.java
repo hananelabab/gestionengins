@@ -69,6 +69,7 @@ public class DemandeController {
     }
 
 
+
     @RequestMapping(value="/{id}",method= RequestMethod.GET)
     DemandeCompletDTO getDemande(@PathVariable("id") String id ){
         Demande demande = demandeService.getById(Long.parseLong(id));
@@ -90,6 +91,29 @@ public class DemandeController {
         Demande newDemande = demandeService.saveDamande(demande);
         detailsDemandeService.saveDetailDemandes(demande.getDetailsDemandeList() , newDemande);
         return  new DemandeDTO(newDemande);
+    }
+
+    @PostMapping(value="/reserver")
+    List<EnginAffecteeDTO> reserveEnins(@RequestBody List<EnginAffecte> enginAffecteList) {
+        List<EnginAffecteeDTO>  enginAffecteeDTOList = new ArrayList<>();
+        for ( EnginAffecte enginAffecte :  enginAffecteList){
+            enginAffecte.getEngin().setEtat(EtatEngin.occupee);
+            enginAffecteeDTOList.add(new EnginAffecteeDTO(enginAffecteService.saveEnginDemande(enginAffecte)));
+            for(Controle controle : enginAffecte.getControleEngin()){
+                Controle oldControle = controleService.getControlByIdCritereAndIdAffectation(controle.getCritere().getIdCritere(),enginAffecte.getIdDemandeEngin());
+                controle.setId(oldControle==null ? null : oldControle.getId());
+                controleService.save(controle , enginAffecte);
+            }
+            enginService.save(enginAffecte.getEngin());
+        }
+        return  enginAffecteeDTOList;
+    }
+
+
+    @DeleteMapping(value="/supenginaffect")
+    EnginAffecteeDTO deletEnginAffect(@RequestBody EnginAffecte enginAffecte){
+        enginAffecteService.delete(enginAffecte);
+        return new EnginAffecteeDTO(enginAffecte);
     }
 
     @PostMapping(value="/affecter")
@@ -121,8 +145,7 @@ public class DemandeController {
             if(enginAffecte.getControleEngin().isEmpty()){
                 //Insert
                 for (Controle controle : newEnginAffecte.getControleEngin()){
-                    controle.setEnginAffecte(newEnginAffecte);
-                    controleService.save(controle);
+                    controleService.save(controle,newEnginAffecte);
                     }
                 enginAffecte.setEtat(EtatAffectation.reserve);
                 }else{
@@ -130,9 +153,8 @@ public class DemandeController {
                 Controle newControle;
                 for (Controle controle : newEnginAffecte.getControleEngin()){
                     newControle = controleService.getControlByIdCritereAndIdAffectation(controle.getCritere().getIdCritere(),newEnginAffecte.getIdDemandeEngin());
-                    controle.setEnginAffecte(newEnginAffecte);
                     controle.setId(newControle.getId());
-                    controleService.save(controle);
+                    controleService.save(controle,newEnginAffecte);
                 }
             }
             enginAffecteService.saveEnginDemande(enginAffecte);

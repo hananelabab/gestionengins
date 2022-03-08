@@ -11,4 +11,5 @@ import java.util.List;
 public interface EnginAffecteRepository extends JpaRepository<EnginAffecte,Long> {
 
     List<EnginAffecte> findAllByEngin_CodeEngin(String codeEngin);
+    EnginAffecte findByEnginCodeEnginAndDemandeNumBCI(String codeEngin , Long numBCI);
 }

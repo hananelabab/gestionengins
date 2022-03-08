@@ -1,5 +1,6 @@
 package com.marsamaroc.gestionengins.service;
 
+import com.marsamaroc.gestionengins.entity.Demande;
 import com.marsamaroc.gestionengins.entity.Engin;
 import com.marsamaroc.gestionengins.entity.EnginAffecte;
 
@@ -11,5 +12,6 @@ public interface EnginAffecteService {
     List<EnginAffecte> getAllAffectationByIdEngin(String id);
     EnginAffecte getById(Long id);
 
+    EnginAffecte getByEnginAndDemande(Engin engin, Demande demande);
     void delete(EnginAffecte enginAffecte);
 }
