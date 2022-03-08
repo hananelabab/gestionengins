@@ -15,4 +15,6 @@ public interface EnginService {
     List<Engin> getEnginsEntreesByFamille(Long Famille);
 
     void save(Engin engin);
+
+    Engin update(Engin engin);
 }

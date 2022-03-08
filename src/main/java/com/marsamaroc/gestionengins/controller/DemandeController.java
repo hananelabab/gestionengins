@@ -104,7 +104,7 @@ public class DemandeController {
                 controle.setId(oldControle==null ? null : oldControle.getId());
                 controleService.save(controle , enginAffecte);
             }
-            enginService.save(enginAffecte.getEngin());
+            enginService.update(enginAffecte.getEngin());
         }
         return  enginAffecteeDTOList;
     }
@@ -133,7 +133,7 @@ public class DemandeController {
             enginAffecte.setEngin(enginService.getById(enginAffecte.getEngin().getCodeEngin()));
             enginAffecte.getEngin().setEtat(EtatEngin.occupee);
             enginAffecteeDTOList.add(new EnginAffecteeDTO(enginAffecteService.saveEnginDemande(enginAffecte)));
-            enginService.save(enginAffecte.getEngin());
+            enginService.update(enginAffecte.getEngin());
         }
         return enginAffecteeDTOList;
     }
@@ -162,7 +162,7 @@ public class DemandeController {
 
         return "Done";
     }
-    
+
     @PostMapping(value="/submit")
     EnginAffecteeDTO submitDemandeSortie(@RequestBody EnginAffecte enginAffecte){
         EnginAffecte enginAffecteOld = enginAffecteService.getById(enginAffecte.getIdDemandeEngin());
@@ -184,7 +184,7 @@ public class DemandeController {
         else
             enginAffecteOld.setEtat(EtatAffectation.enexecution);
         enginAffecteService.saveEnginDemande(enginAffecteOld);
-        enginService.save(enginAffecteOld.getEngin());
+        enginService.update(enginAffecteOld.getEngin());
         return new EnginAffecteeDTO(enginAffecteOld);
     }
 

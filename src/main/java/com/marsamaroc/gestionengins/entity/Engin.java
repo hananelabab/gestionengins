@@ -28,6 +28,7 @@ public class Engin implements Serializable {
     List<EnginAffecte> enginAffecteList;
 
 
+
     public EnginAffecte getDerniereAffectation(){
         EnginAffecte dernierEnginAffecte = null;
         if(enginAffecteList!=null){

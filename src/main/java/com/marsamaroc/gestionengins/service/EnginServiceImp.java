@@ -33,7 +33,14 @@ public class EnginServiceImp implements EnginService{
         enginRepository.save(engin);
     }
 
-	@Override
+    @Override
+    public Engin update(Engin engin) {
+        Engin oldEngin = enginRepository.getById(engin.getCodeEngin());
+        oldEngin.setEtat(engin.getEtat());
+        return enginRepository.save(oldEngin);
+    }
+
+    @Override
 	public List<Engin> getAll() {
 		// TODO Auto-generated method stub
 		return enginRepository.findAll();

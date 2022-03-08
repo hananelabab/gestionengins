@@ -44,7 +44,7 @@ public class EnginsController {
         List<Engin> enginList = enginService.getAll();
         List<EnginDTO> enginDTOList =new ArrayList<>();
         for (Engin engin : enginList)
-        	enginDTOList.add(new EnginDTO(engin, engin.getDerniereAffectation()));
+        	enginDTOList.add(new EnginDTO(engin,  engin.getDerniereAffectation()));
         return enginDTOList;
     }
     
