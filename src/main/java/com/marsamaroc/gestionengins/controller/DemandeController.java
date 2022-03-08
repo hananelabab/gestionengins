@@ -162,6 +162,7 @@ public class DemandeController {
 
         return "Done";
     }
+    
     @PostMapping(value="/submit")
     EnginAffecteeDTO submitDemandeSortie(@RequestBody EnginAffecte enginAffecte){
         EnginAffecte enginAffecteOld = enginAffecteService.getById(enginAffecte.getIdDemandeEngin());
@@ -186,6 +187,7 @@ public class DemandeController {
         enginService.save(enginAffecteOld.getEngin());
         return new EnginAffecteeDTO(enginAffecteOld);
     }
+
 
 
     @GetMapping(value="/{idDemande}/{idEngin}")
