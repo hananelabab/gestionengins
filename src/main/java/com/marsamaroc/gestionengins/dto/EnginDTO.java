@@ -33,7 +33,7 @@ public class EnginDTO {
         this.capacite = engin.getCapacite();
         this.compteur = engin.getCompteur();
         this.idDemandeEngin = enginAffecte!= null ? enginAffecte.getIdDemandeEngin() : null;
-        Date dateDerniereAffectation=  engin.getDerniereAffectation()!=null ? engin.getDerniereAffectation().getDateSortie():null ;
+        Date dateDerniereAffectation=  engin.getDerniereAffectation()!=null ? engin.getDerniereAffectation().getDateAffectation() : null ;
         this.famille = new FamilleDTO(engin.getFamille(),dateDerniereAffectation);
         if(enginAffecte != null){
             this.conducteur =enginAffecte.getConducteur() == null ? null :  new UserDTO(enginAffecte.getConducteur());
