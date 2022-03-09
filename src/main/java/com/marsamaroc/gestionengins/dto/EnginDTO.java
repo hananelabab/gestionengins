@@ -16,6 +16,7 @@ public class EnginDTO {
     private Long compteur;
     private FamilleDTO famille;
     private Long idDemandeEngin;
+    private String nomEngin;
 
 
     private UserDTO conducteur;
@@ -28,6 +29,7 @@ public class EnginDTO {
     private List<CritereDemandeDTO> critere = new ArrayList<>();
 
     public EnginDTO(Engin engin, EnginAffecte enginAffecte){
+        this.nomEngin = engin.getNomEngin();
         this.codeEngin = engin.getCodeEngin();
         this.typeEngin = engin.getTypeEngin();
         this.capacite = engin.getCapacite();

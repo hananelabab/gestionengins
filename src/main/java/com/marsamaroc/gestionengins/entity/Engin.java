@@ -13,19 +13,20 @@ import java.util.List;
 @Entity
 public class Engin implements Serializable {
     @Id
-    String codeEngin;
-    String typeEngin;
-    String capacite;
-    Long compteur;
+    private String codeEngin;
+    private String nomEngin;
+    private String typeEngin;
+    private String capacite;
+    private Long compteur;
     @ManyToOne
     @JoinColumn(name = "id_famille")
-    Famille famille;
+    private Famille famille;
 
     @Enumerated(EnumType.STRING)
-    EtatEngin etat = EtatEngin.disponible;
+    private EtatEngin etat = EtatEngin.disponible;
 
     @OneToMany(mappedBy = "engin")
-    List<EnginAffecte> enginAffecteList;
+    private List<EnginAffecte> enginAffecteList;
 
 
 

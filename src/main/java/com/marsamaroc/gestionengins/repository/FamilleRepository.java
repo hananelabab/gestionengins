@@ -9,7 +9,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @Repository
-public interface FamilleRepository extends JpaRepository<Famille, Long> {
+public interface FamilleRepository extends JpaRepository<Famille, String> {
 
     Famille findByNomFamille(String nomFamille);
 

@@ -13,6 +13,7 @@ import java.util.List;
 public class EnginSEDTO {
 
     private String codeEngin;
+    private String nomEngin;
     private String typeEngin;
     private String capacite;
     private Long compteur;
@@ -21,6 +22,7 @@ public class EnginSEDTO {
     private EtatAffectation etat;
     private Long numBCI;
     public EnginSEDTO(Engin engin){
+        this.nomEngin = engin.getNomEngin();
         this.codeEngin = engin.getCodeEngin();
         this.typeEngin = engin.getTypeEngin() ;
         this.capacite = engin.getCapacite();

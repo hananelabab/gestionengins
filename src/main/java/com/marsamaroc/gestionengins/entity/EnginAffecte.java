@@ -37,4 +37,13 @@ public class EnginAffecte implements Serializable {
     @JoinColumn(name = "conducteur")
     private User conducteur;
 
+    public void addControle(Controle controle) {
+        controle.setEnginAffecte(this);
+        controleEngin.add(controle);
+    }
+
+    public void removeControle(Controle controle) {
+        controleEngin.remove(controle);
+        controle.setEnginAffecte(null);
+    }
 }

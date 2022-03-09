@@ -28,6 +28,10 @@ public class EnginsController {
     List<Engin> addEnginList(@RequestBody List<Engin> enginList){
         Famille famille_Old;
         for(Engin engin : enginList){
+            if(engin.getFamille().getNomFamille()==null) {
+                engin.getFamille().setNomFamille("autre");
+                engin.getFamille().setCodeFamille("AT");
+            }
             famille_Old = familleService.getFamilleByName(engin.getFamille().getNomFamille());
             if(famille_Old == null)
                 famille_Old = familleService.saveFamille(engin.getFamille());

@@ -10,16 +10,18 @@ public class FamilleDemandeDTO {
     Long id;
     String nomFamille;
     String icon;
+    Long idFammile;
     int quantite;
     public FamilleDemandeDTO(DetailsDemande detailsDemande){
-        this.id= detailsDemande.getFamille().getIdFamille();
+        this.idFammile = detailsDemande.getFamille().getIdFamille();
+        this.id= detailsDemande.getId();
         this.nomFamille= detailsDemande.getFamille().getNomFamille();
         this.icon= detailsDemande.getFamille().getIcon();
         this.quantite= detailsDemande.getQuantite();
     }
     DetailsDemande convertToEntity(Demande demande){
         Famille famille = new Famille();
-        famille.setIdFamille(id);
+        famille.setIdFamille(idFammile);
         famille.setNomFamille(nomFamille);
         famille.setIcon(icon);
         DetailsDemande detailsDemande = new DetailsDemande();

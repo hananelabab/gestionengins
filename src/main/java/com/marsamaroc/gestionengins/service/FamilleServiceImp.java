@@ -12,8 +12,8 @@ public class FamilleServiceImp implements FamilleService {
     FamilleRepository familleRepository;
 
     @Override
-    public Famille getById(Long id) {
-        return familleRepository.getById(id);
+    public Famille getById(String idFamille) {
+        return familleRepository.getById(idFamille);
     }
 
     @Override

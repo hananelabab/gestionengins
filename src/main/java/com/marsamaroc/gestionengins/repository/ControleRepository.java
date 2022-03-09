@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface ControleRepository extends JpaRepository<Controle, Long> {
 
+    void deleteByEnginAffecteIdDemandeEngin(Long idDemandeEngin);
     Controle findAllByCritere_IdCritereAndEnginAffecte_IdDemandeEngin(Long idCritere, Long idDemandeEngin);
 }

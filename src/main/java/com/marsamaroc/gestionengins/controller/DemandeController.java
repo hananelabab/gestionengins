@@ -98,7 +98,8 @@ public class DemandeController {
         List<EnginAffecteeDTO>  enginAffecteeDTOList = new ArrayList<>();
         for ( EnginAffecte enginAffecte :  enginAffecteList){
             enginAffecte.getEngin().setEtat(EtatEngin.occupee);
-            enginAffecteeDTOList.add(new EnginAffecteeDTO(enginAffecteService.saveEnginDemande(enginAffecte)));
+            enginAffecte.setIdDemandeEngin(enginAffecteService.saveEnginDemande(enginAffecte).getIdDemandeEngin());
+            enginAffecteeDTOList.add(new EnginAffecteeDTO(enginAffecte));
             for(Controle controle : enginAffecte.getControleEngin()){
                 Controle oldControle = controleService.getControlByIdCritereAndIdAffectation(controle.getCritere().getIdCritere(),enginAffecte.getIdDemandeEngin());
                 controle.setId(oldControle==null ? null : oldControle.getId());
@@ -111,9 +112,9 @@ public class DemandeController {
 
 
     @DeleteMapping(value="/supenginaffect")
-    EnginAffecteeDTO deletEnginAffect(@RequestBody EnginAffecte enginAffecte){
+    EnginAffecte deletEnginAffect(@RequestBody EnginAffecte enginAffecte){
         enginAffecteService.delete(enginAffecte);
-        return new EnginAffecteeDTO(enginAffecte);
+        return enginAffecte;
     }
 
     @PostMapping(value="/affecter")

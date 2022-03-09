@@ -11,9 +11,9 @@ public class Famille implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     Long idFamille;
+    String codeFamille;
     String nomFamille;
     String icon;
-    String codeFamille;
 
     @OneToMany(mappedBy="famille")
     List<Engin> engin;
