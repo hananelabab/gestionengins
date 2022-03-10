@@ -37,13 +37,22 @@ public class EnginAffecte implements Serializable {
     @JoinColumn(name = "conducteur")
     private User conducteur;
 
-    public void addControle(Controle controle) {
-        controle.setEnginAffecte(this);
-        controleEngin.add(controle);
-    }
 
-    public void removeControle(Controle controle) {
-        controleEngin.remove(controle);
-        controle.setEnginAffecte(null);
+
+    public void sync(EnginAffecte enginAffecte){
+        this.idDemandeEngin = enginAffecte.idDemandeEngin != null ? enginAffecte.getIdDemandeEngin() : this.idDemandeEngin;
+        this.demande = enginAffecte.demande != null ? enginAffecte.getDemande() : this.demande;
+
+        if(enginAffecte.controleEngin != null )
+            for(int i= 0;i< enginAffecte.getControleEngin().size();i++)
+                this.controleEngin.get(i).sync(enginAffecte.controleEngin.get(i));
+        this.etat = enginAffecte.etat != null ? enginAffecte.getEtat() : this.etat;
+        this.engin = enginAffecte.engin != null ? enginAffecte.getEngin() : this.engin;
+        this.dateEntree = enginAffecte.dateEntree != null ? enginAffecte.getDateEntree() : this.dateEntree;
+        this.dateSortie = enginAffecte.dateSortie != null ? enginAffecte.getDateSortie() : this.dateSortie;
+        this.dateAffectation = enginAffecte.dateAffectation != null ? enginAffecte.getDateAffectation() : this.dateAffectation;
+        this.responsableAffectation = enginAffecte.responsableAffectation !=null ? enginAffecte.getResponsableAffectation() : this.responsableAffectation;
+        this.conducteur = enginAffecte.conducteur != null ? enginAffecte.getConducteur() : this.conducteur;
+
     }
 }

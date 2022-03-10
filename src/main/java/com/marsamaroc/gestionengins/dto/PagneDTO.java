@@ -17,5 +17,13 @@ public class PagneDTO {
     private DemandeDTO currentDemande;
     public PagneDTO(Pagne pagne){
 
+        this.typePagne = pagne.getTypePagne();
+        this.id = pagne.getId();
+        this.derniereDemande = new DemandeDTO(pagne.getDerniereDemande()) ;
+        this.currentDemande = new DemandeDTO(pagne.getCurrentDemande());
+        this.engin = new EnginDTO(pagne.getEngin(), pagne.getEngin().getDerniereAffectation());
+        this.etat = pagne.getEtat();
+        this.observation = pagne.getObservation();
+
     }
 }
