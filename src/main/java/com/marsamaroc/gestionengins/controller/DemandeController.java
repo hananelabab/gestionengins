@@ -114,6 +114,8 @@ public class DemandeController {
     @PostMapping(value="/supenginaffect")
     EnginAffecte deletEnginAffect(@RequestBody EnginAffecte enginAffecte){
         enginAffecteService.delete(enginAffecte);
+        enginAffecte.getEngin().setEtat(EtatEngin.disponible);
+        enginService.update(enginAffecte.getEngin());
         return enginAffecte;
     }
 
@@ -167,6 +169,7 @@ public class DemandeController {
     @PostMapping(value="/submit")
     EnginAffecteeDTO submitDemandeSortie(@RequestBody EnginAffecte enginAffecte){
         EnginAffecte enginAffecteOld = enginAffecteService.getById(enginAffecte.getIdDemandeEngin());
+        enginAffecteOld.sync(enginAffecte);
         if(enginAffecte.getConducteur() != null && enginAffecte.getResponsableAffectation()!=null){
             enginAffecte.getResponsableAffectation().setType("Responsable");
             enginAffecte.getResponsableAffectation().setEnable('N');
@@ -179,12 +182,16 @@ public class DemandeController {
             enginAffecteOld.setConducteur(conducteur);
         }
         if (enginAffecteOld.getControleEngin().get(0).getEtatEntree() != 0){
-            enginAffecte.setEtat(EtatAffectation.execute);
-            enginAffecteOld.getEngin().setEtat(EtatEngin.occupee);
+            enginAffecteOld.setEtat(EtatAffectation.execute);
+            enginAffecteOld.getEngin().setEtat(EtatEngin.disponible);
+            enginAffecteOld.setDateEntree(new Date());
         }
-        else
+        else{
             enginAffecteOld.setEtat(EtatAffectation.enexecution);
+            enginAffecteOld.setDateSortie(new Date());
+        }
         enginAffecteService.saveEnginDemande(enginAffecteOld);
+        controleService.saveAll(enginAffecteOld.getControleEngin());
         enginService.update(enginAffecteOld.getEngin());
         return new EnginAffecteeDTO(enginAffecteOld);
     }

@@ -23,4 +23,16 @@ public class Controle implements Serializable {
     private char etatEntree;
     private String obsEntree;
     private String obsSortie;
+
+
+
+    public void sync(Controle controle){
+        this.id = controle.id != null ? controle.id : this.id;
+        this.enginAffecte =  controle.enginAffecte != null ? controle.enginAffecte : this.enginAffecte;
+        this.critere =  controle.critere != null ? controle.critere : this.critere;
+        this.etatSortie =  controle.etatSortie != 0 ? controle.etatSortie : this.etatSortie;
+        this.etatEntree =  controle.etatEntree != 0 ? controle.etatEntree : this.etatEntree;
+        this.obsEntree =  controle.obsEntree != null ? controle.obsEntree : this.obsEntree;
+        this.obsSortie =  controle.obsSortie != null ? controle.obsSortie : this.obsSortie;
+    }
 }
