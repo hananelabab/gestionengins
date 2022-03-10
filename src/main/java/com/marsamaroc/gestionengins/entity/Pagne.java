@@ -8,14 +8,14 @@ import java.io.Serializable;
 @Data
 public class Pagne implements Serializable {
     @Id
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String typePagne ;
 
     private String observation;
 
-    private String etat = "";
+    private String etat = "NR";
 
     @ManyToOne
     @JoinColumn(name = "engin_code_engin")
@@ -23,13 +23,10 @@ public class Pagne implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "derniere_demande_num_bci")
-    private Demande derniereDemande;
+    private EnginAffecte dernierAffectation;
 
     @ManyToOne
     @JoinColumn(name = "current_demande_num_bci")
     private Demande currentDemande;
-
-
-
 
 }

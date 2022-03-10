@@ -113,9 +113,13 @@ public class DemandeController {
 
     @PostMapping(value="/supenginaffect")
     EnginAffecte deletEnginAffect(@RequestBody EnginAffecte enginAffecte){
+        enginAffecte = enginAffecteService.getById(enginAffecte.getIdDemandeEngin());
         enginAffecteService.delete(enginAffecte);
-        enginAffecte.getEngin().setEtat(EtatEngin.disponible);
-        enginService.update(enginAffecte.getEngin());
+        if(enginAffecte.getEngin().getEtat() == EtatEngin.occupee) {
+            enginAffecte.getEngin().setEtat(EtatEngin.disponible);
+            enginService.update(enginAffecte.getEngin());
+        }
+
         return enginAffecte;
     }
 
