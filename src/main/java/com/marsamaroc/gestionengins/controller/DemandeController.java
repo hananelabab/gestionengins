@@ -111,7 +111,7 @@ public class DemandeController {
     }
 
 
-    @DeleteMapping(value="/supenginaffect")
+    @PostMapping(value="/supenginaffect")
     EnginAffecte deletEnginAffect(@RequestBody EnginAffecte enginAffecte){
         enginAffecteService.delete(enginAffecte);
         return enginAffecte;
