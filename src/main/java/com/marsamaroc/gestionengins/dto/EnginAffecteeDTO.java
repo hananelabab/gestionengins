@@ -10,9 +10,9 @@ public class EnginAffecteeDTO {
     private Long numBCI;
 
     public EnginAffecteeDTO(EnginAffecte enginAffecte){
-        idEnginAffect = enginAffecte.getIdDemandeEngin();
-        codeEngin = enginAffecte.getEngin().getCodeEngin();
-        numBCI = enginAffecte.getDemande().getNumBCI();
+        idEnginAffect = enginAffecte != null ?enginAffecte.getIdDemandeEngin(): null ;
+        codeEngin = enginAffecte != null ? enginAffecte.getEngin().getCodeEngin(): null ;
+        numBCI = enginAffecte != null ? enginAffecte.getDemande().getNumBCI(): null ;
     }
 
 }
