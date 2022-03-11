@@ -4,18 +4,14 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
+
 @Entity
 @Data
 public class Pagne implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String typePagne ;
-
-    private String observation;
-
-    private String etat = "NR";
 
     @ManyToOne
     @JoinColumn(name = "engin_code_engin")
@@ -28,5 +24,9 @@ public class Pagne implements Serializable {
     @ManyToOne
     @JoinColumn(name = "current_demande_num_bci")
     private Demande currentDemande;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "pagne_id")
+    private List<DetailsPagne> detailsPagneList;
 
 }

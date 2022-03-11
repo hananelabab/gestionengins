@@ -25,6 +25,9 @@ public class Engin implements Serializable {
     @Enumerated(EnumType.STRING)
     private EtatEngin etat = EtatEngin.disponible;
 
+    @Enumerated(EnumType.STRING)
+    private EtatEngin etatProd = EtatEngin.disponible;
+
     @OneToMany(mappedBy = "engin")
     private List<EnginAffecte> enginAffecteList;
 

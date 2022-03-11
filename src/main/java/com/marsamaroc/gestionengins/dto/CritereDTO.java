@@ -14,9 +14,9 @@ public class CritereDTO {
     private  Long idCritere;
     private String critere;
     
-    public CritereDTO(Critere critereDTO){
-        this.idCritere = critereDTO.getIdCritere();
-        this.critere = critereDTO.getNomCritere();
+    public CritereDTO(Critere critere){
+        this.idCritere = critere.getIdCritere();
+        this.critere = critere.getNomCritere();
 
     }
 }
