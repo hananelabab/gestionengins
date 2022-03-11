@@ -15,7 +15,7 @@ public class DetailsPagne implements Serializable{
 
     private String observation;
 
-    private String statut;
+    private String statut="NF";
 
     @ManyToOne
     @JoinColumn(name = "pagne_id")
