@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 @Entity
 @Data
-public class DetailsPagne implements Serializable{
+public class DetailsPanne implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,8 +18,8 @@ public class DetailsPagne implements Serializable{
     private String statut="NF";
 
     @ManyToOne
-    @JoinColumn(name = "pagne_id")
-    private Pagne pagne;
+    @JoinColumn(name = "panne_id")
+    private Panne panne;
 
     @ManyToOne
     @JoinColumn(name = "critere_id_critere")

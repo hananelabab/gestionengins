@@ -13,7 +13,7 @@ public enum EtatEngin {
     disponible(EtatEngin.disponible_value);
 
     public static final String indisponible_value = "indisponible";
-    public static final String enpagne_value = "enpagne";
+    public static final String enpagne_value = "enpanne";
     public static final String occupee_value = "occupee";
     public static final String disponible_value = "disponible";
 

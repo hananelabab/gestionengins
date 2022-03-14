@@ -8,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Data
-public class Pagne implements Serializable {
+public class Panne implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,7 +26,7 @@ public class Pagne implements Serializable {
     private Demande currentDemande;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "pagne_id")
-    private List<DetailsPagne> detailsPagneList;
+    @JoinColumn(name = "panne_id")
+    private List<DetailsPanne> detailsPanneList;
 
 }
