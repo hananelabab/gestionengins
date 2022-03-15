@@ -2,10 +2,7 @@ package com.marsamaroc.gestionengins.entity;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -13,8 +10,14 @@ import java.io.Serializable;
 public class Post implements Serializable {
     @Id
     Long codePost;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_entite")
     Entite entite;
+
+    public void sync(Post post){
+        if(post == null) return;
+        this.codePost  = post.getCodePost()!=null ? post.getCodePost() : this.codePost;
+        this.entite  = post.getEntite()!=null ? post.getEntite() : this.entite;
+    }
 
 }

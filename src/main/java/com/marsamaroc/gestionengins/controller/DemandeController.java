@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -97,7 +98,7 @@ public class DemandeController {
     List<EnginAffecteeDTO> reserveEnins(@RequestBody List<EnginAffecte> enginAffecteList) {
         List<EnginAffecteeDTO>  enginAffecteeDTOList = new ArrayList<>();
         for ( EnginAffecte enginAffecte :  enginAffecteList){
-            enginAffecte.getEngin().setEtat(EtatEngin.occupee);
+            enginAffecte.getEngin().setEtat(EtatEngin.sortie);
             enginAffecte.setIdDemandeEngin(enginAffecteService.saveEnginDemande(enginAffecte).getIdDemandeEngin());
             enginAffecteeDTOList.add(new EnginAffecteeDTO(enginAffecte));
             for(Controle controle : enginAffecte.getControleEngin()){
@@ -115,7 +116,7 @@ public class DemandeController {
     EnginAffecte deletEnginAffect(@RequestBody EnginAffecte enginAffecte){
         enginAffecte = enginAffecteService.getById(enginAffecte.getIdDemandeEngin());
         enginAffecteService.delete(enginAffecte);
-        if(enginAffecte.getEngin().getEtat() == EtatEngin.occupee) {
+        if(enginAffecte.getEngin().getEtat() == EtatEngin.sortie) {
             enginAffecte.getEngin().setEtat(EtatEngin.disponible);
             enginService.update(enginAffecte.getEngin());
         }
@@ -138,7 +139,7 @@ public class DemandeController {
             enginAffecte.setDateAffectation(new Date());
             enginAffecte.setEtat(EtatAffectation.reserve);
             enginAffecte.setEngin(enginService.getById(enginAffecte.getEngin().getCodeEngin()));
-            enginAffecte.getEngin().setEtat(EtatEngin.occupee);
+            enginAffecte.getEngin().setEtat(EtatEngin.sortie);
             enginAffecteeDTOList.add(new EnginAffecteeDTO(enginAffecteService.saveEnginDemande(enginAffecte)));
             enginService.update(enginAffecte.getEngin());
         }
@@ -202,12 +203,10 @@ public class DemandeController {
 
 
 
-    @GetMapping(value="/{idDemande}/{idEngin}")
-    EnginDTO ElisteEnginsEntree(@PathVariable("idEngin") String idEngin, @PathVariable("idDemande") String idDemande){
+    @GetMapping(value="/{idEngin}")
+    DemandeCompletDTO ElisteEnginsEntree(@PathVariable("idEngin") String idEngin){
         Engin engin = enginService.getById(idEngin);
-        Demande demande = demandeService.getById(Long.parseLong(idDemande));
-        EnginDTO enginDTO = new EnginDTO(engin,demande.getEnginAffecte(idEngin));
-        return enginDTO;
+        return new DemandeCompletDTO(engin.getDerniereAffectation().getDemande(), Arrays.asList(new EnginDTO(engin,engin.getDerniereAffectation())));
     }
 
 }
