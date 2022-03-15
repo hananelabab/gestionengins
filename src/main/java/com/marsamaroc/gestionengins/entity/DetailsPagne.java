@@ -4,8 +4,9 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
-@Entity
+
 @Data
+@Entity
 public class DetailsPagne implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
