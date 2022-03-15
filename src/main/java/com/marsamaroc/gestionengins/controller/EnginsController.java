@@ -2,8 +2,10 @@ package com.marsamaroc.gestionengins.controller;
 
 import com.marsamaroc.gestionengins.dto.EnginDTO;
 import com.marsamaroc.gestionengins.dto.EnginSEDTO;
+import com.marsamaroc.gestionengins.dto.PostDTO;
 import com.marsamaroc.gestionengins.entity.Engin;
 import com.marsamaroc.gestionengins.entity.Famille;
+import com.marsamaroc.gestionengins.entity.Post;
 import com.marsamaroc.gestionengins.service.ControleService;
 import com.marsamaroc.gestionengins.service.EnginService;
 import com.marsamaroc.gestionengins.service.FamilleService;
@@ -50,6 +52,11 @@ public class EnginsController {
         for (Engin engin : enginList)
         	enginDTOList.add(new EnginDTO(engin,  engin.getDerniereAffectation()));
         return enginDTOList;
+    }
+
+    @PostMapping(value="/add")
+    EnginDTO saveOrUpdate(@RequestBody Engin enging){
+        return enginService.saveOrUpdate(enging);
     }
     
     @GetMapping(value="/listeEnginsSortie")

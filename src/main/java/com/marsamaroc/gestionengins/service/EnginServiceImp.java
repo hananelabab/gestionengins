@@ -34,6 +34,15 @@ public class EnginServiceImp implements EnginService{
     }
 
     @Override
+    public EnginDTO saveOrUpdate(Engin engin) {
+        Engin enginold = enginRepository.findByCodeEngin(engin.getCodeEngin());
+        if(enginold!=null) enginold.sync(engin);
+        else enginold = engin;
+        return new EnginDTO(enginRepository.save(enginold),null);
+    }
+
+
+    @Override
     public Engin update(Engin engin) {
         Engin oldEngin = enginRepository.getById(engin.getCodeEngin());
         oldEngin.setEtat(engin.getEtat());

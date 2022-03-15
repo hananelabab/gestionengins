@@ -1,9 +1,8 @@
 package com.marsamaroc.gestionengins.service;
 
-import com.marsamaroc.gestionengins.entity.Pagne;
-import org.springframework.stereotype.Service;
+import com.marsamaroc.gestionengins.entity.Panne;
 
 public interface PagneService {
-    Pagne saveOrUpdatePagne(Pagne pagne);
+    Panne saveOrUpdatePagne(Panne panne);
 
 }

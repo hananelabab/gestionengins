@@ -1,10 +1,8 @@
 package com.marsamaroc.gestionengins.controller;
 
 import com.marsamaroc.gestionengins.dto.PagneDTO;
-import com.marsamaroc.gestionengins.entity.Demande;
 import com.marsamaroc.gestionengins.entity.Engin;
-import com.marsamaroc.gestionengins.entity.EnginAffecte;
-import com.marsamaroc.gestionengins.entity.Pagne;
+import com.marsamaroc.gestionengins.entity.Panne;
 import com.marsamaroc.gestionengins.enums.EtatEngin;
 import com.marsamaroc.gestionengins.service.DemandeService;
 import com.marsamaroc.gestionengins.service.EnginService;
@@ -25,14 +23,14 @@ public class PagneController {
     DemandeService demandeService;
 
     @PostMapping(value = "/addPagne")
-    PagneDTO addPAgne(@RequestBody  Pagne pagne){
-        Engin engin = enginService.getById(pagne.getEngin().getCodeEngin());
+    PagneDTO addPAgne(@RequestBody Panne panne){
+        Engin engin = enginService.getById(panne.getEngin().getCodeEngin());
         engin.setEtat(EtatEngin.enpagne);
         enginService.update(engin);
-        pagne.setCurrentDemande(demandeService.getById(pagne.getCurrentDemande().getNumBCI()));
-        pagne.setDernierAffectation(enginService.getById(pagne.getEngin().getCodeEngin()).getDerniereAffectation());
-        pagne.setEngin(engin);
-        return new PagneDTO(pagneService.saveOrUpdatePagne(pagne));
+        panne.setCurrentDemande(demandeService.getById(panne.getCurrentDemande().getNumBCI()));
+        panne.setDernierAffectation(enginService.getById(panne.getEngin().getCodeEngin()).getDerniereAffectation());
+        panne.setEngin(engin);
+        return new PagneDTO(pagneService.saveOrUpdatePagne(panne));
     }
 
 
