@@ -1,8 +1,8 @@
 package com.marsamaroc.gestionengins.service;
 
-import com.marsamaroc.gestionengins.entity.Panne;
+import com.marsamaroc.gestionengins.entity.Pagne;
 
 public interface PagneService {
-    Panne saveOrUpdatePagne(Panne panne);
+    Pagne saveOrUpdatePagne(Pagne panne);
 
 }

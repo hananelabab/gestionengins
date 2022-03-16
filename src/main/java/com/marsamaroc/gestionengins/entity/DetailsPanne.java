@@ -4,8 +4,9 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
-@Entity
+
 @Data
+@Entity
 public class DetailsPanne implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +20,7 @@ public class DetailsPanne implements Serializable{
 
     @ManyToOne
     @JoinColumn(name = "panne_id")
-    private Panne panne;
+    private Pagne panne;
 
     @ManyToOne
     @JoinColumn(name = "critere_id_critere")

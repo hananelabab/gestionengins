@@ -8,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Data
-public class Panne implements Serializable {
+public class Pagne implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
