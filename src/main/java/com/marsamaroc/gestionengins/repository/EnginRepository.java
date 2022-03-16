@@ -27,7 +27,7 @@ public interface EnginRepository extends JpaRepository<Engin,String> {
     @Query("select e from Engin e"+
             " where e.etat ='"+ EtatEngin.disponible_value+
             "' and e.famille.idFamille = :#{#idFamille} " +
-            "and e.disponibiliteParck="+ DisponibiliteEnginParck.disponible_value)
+            "and e.disponibiliteParck='"+ DisponibiliteEnginParck.disponible_value+"'")
     List<Engin> findAllEnginEntreeByFamille(@Param("idFamille") Long famille );
 
     Engin findByCodeEngin(String codeEngin);

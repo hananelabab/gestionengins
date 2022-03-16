@@ -1,7 +1,7 @@
 package com.marsamaroc.gestionengins.dto;
 
 import com.marsamaroc.gestionengins.entity.DetailsPanne;
-import com.marsamaroc.gestionengins.entity.Panne;
+import com.marsamaroc.gestionengins.entity.Pagne;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ public class PagneDTO {
     private DemandeDTO currentDemande;
     private List<DetailsPagneDTO> detailsPagneList = new ArrayList<>();
 
-    public PagneDTO(Panne panne){
+    public PagneDTO(Pagne panne){
         this.id = panne.getId();
         this.derniereAffectation = new EnginAffecteeDTO(panne.getDernierAffectation()) ;
         this.currentDemande = new DemandeDTO(panne.getCurrentDemande());
