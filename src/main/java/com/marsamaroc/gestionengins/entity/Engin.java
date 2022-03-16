@@ -14,7 +14,6 @@ import java.util.List;
 public class Engin implements Serializable {
     @Id
     private String codeEngin;
-
     private String nomEngin;
     private String typeEngin;
     private String capacite;

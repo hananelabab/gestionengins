@@ -12,5 +12,6 @@ public interface DemandeService {
 
     List<Demande> findAllDemandeEnregistree();
 
+    void deletDemande(Demande demande);
     List<Demande> findAllDemandeVerifiee();
 }
