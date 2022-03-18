@@ -15,7 +15,7 @@ public class Entite implements Serializable {
 
     private String entite;
 
-    @OneToMany(mappedBy="entite",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy="entite")
     List<Post> posts;
 
     @OneToMany(mappedBy="entite")

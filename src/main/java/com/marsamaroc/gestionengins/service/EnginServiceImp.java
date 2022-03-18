@@ -15,7 +15,7 @@ public class EnginServiceImp implements EnginService{
     EnginRepository enginRepository;
     @Override
     public Engin getById(String id) {
-        return enginRepository.getById(id);
+        return enginRepository.findByCodeEngin(id);
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.marsamaroc.gestionengins.configuration;
 
 import com.marsamaroc.gestionengins.entity.Critere;
 import com.marsamaroc.gestionengins.entity.Engin;
+import com.marsamaroc.gestionengins.entity.Entite;
 import com.marsamaroc.gestionengins.entity.Famille;
 import com.marsamaroc.gestionengins.entity.Pagne;
 import com.marsamaroc.gestionengins.entity.Post;
@@ -27,6 +28,7 @@ public class MyCoolConfiguration  {
         restConfiguration.exposeIdsFor(Famille.class);
         restConfiguration.exposeIdsFor(Pagne.class);
 
+        restConfiguration.exposeIdsFor(Entite.class);
 
     }
 

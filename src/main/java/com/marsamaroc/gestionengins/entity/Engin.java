@@ -14,10 +14,10 @@ import java.util.List;
 public class Engin implements Serializable {
     @Id
     private String codeEngin;
-
     private String nomEngin;
     private String typeEngin;
     private String capacite;
+    private String port;
     private Long compteur;
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "id_famille")
@@ -32,7 +32,7 @@ public class Engin implements Serializable {
     @OneToMany(mappedBy = "engin")
     private List<EnginAffecte> enginAffecteList;
 
-
+    private String site;
 
     public void sync(Engin engin){
         if(engin == null) return;

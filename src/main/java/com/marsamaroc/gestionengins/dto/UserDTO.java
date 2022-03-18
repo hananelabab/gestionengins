@@ -20,6 +20,7 @@ public class UserDTO {
 	     String password;
 	     char enable;
 	     String type;
+	     EntiteDTO entite;
 	    
 //-----
     
@@ -32,6 +33,7 @@ public class UserDTO {
         this.enable = user.getEnable();
         this.type = user.getType();
         this.nom = user.getNom();
+        this.entite = new EntiteDTO(user.getEntite());
 
     }
     

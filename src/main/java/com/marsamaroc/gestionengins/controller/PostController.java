@@ -23,4 +23,15 @@ public class PostController {
     PostDTO saveOrUpdate(@RequestBody Post post){
         return postService.savOrUpdate(post);
     }
+    @GetMapping(value="/get")
+    List<PostDTO> getPost(){
+    	
+    	List<PostDTO> postDTOList = new ArrayList<>();
+    	
+    	List<Post> posts = postService.getAll();
+    	for(Post post : posts)
+    		postDTOList.add(new PostDTO(post));
+        return postDTOList;
+    }
+    
 }
