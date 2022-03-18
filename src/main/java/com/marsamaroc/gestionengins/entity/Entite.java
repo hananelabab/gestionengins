@@ -9,18 +9,16 @@ import java.util.List;
 @Data
 @Entity
 public class Entite implements Serializable {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    private Long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	private Long id;
 
-    private String entite;
+	private String entite;
 
-    @OneToMany(mappedBy="entite")
-    List<Post> posts;
+	@OneToMany(mappedBy = "entite")
+	List<Post> posts;
 
-    @OneToMany(mappedBy="entite")
-    List<User> userList;
-
-
+	@OneToMany(mappedBy = "entite")
+	List<User> userList;
 
 }
