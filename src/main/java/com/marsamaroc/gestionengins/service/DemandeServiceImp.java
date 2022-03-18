@@ -47,6 +47,11 @@ public class DemandeServiceImp implements DemandeService {
     }
 
     @Override
+    public void deletDemande(Demande demande) {
+        demandeRepository.delete(demande);
+    }
+
+    @Override
     public List<Demande> findAllDemandeVerifiee() {
         return demandeRepository.findByEnginsAffecteListIsNotNull();
     }

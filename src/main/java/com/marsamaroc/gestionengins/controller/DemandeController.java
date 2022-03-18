@@ -90,7 +90,6 @@ public class DemandeController {
     @PostMapping(value="/add")
     DemandeDTO addDemande(@RequestBody Demande demande) {
         Demande newDemande = demandeService.saveDamande(demande);
-        detailsDemandeService.saveDetailDemandes(demande.getDetailsDemandeList() , newDemande);
         return  new DemandeDTO(newDemande);
     }
 
@@ -122,6 +121,16 @@ public class DemandeController {
         }
 
         return enginAffecte;
+    }
+
+    @PostMapping(value="delete/{numBCI}")
+    String deletDemande(@PathVariable("numBCI") Long numBCI){
+        Demande demande = demandeService.getById(numBCI);
+        if(demande.getEnginsAffecteList().isEmpty()){
+            demandeService.deletDemande(demande);
+            return "deleted";
+        }
+        return "Error";
     }
 
     @PostMapping(value="/affecter")

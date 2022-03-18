@@ -6,6 +6,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -22,10 +23,11 @@ public class  Demande implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id_post")
     Post post;
-    @OneToMany(mappedBy = "demande")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "demande_numbci")
     List<DetailsDemande> detailsDemandeList;
     @OneToMany(mappedBy = "demande")
-    List<EnginAffecte> enginsAffecteList;
+    List<EnginAffecte> enginsAffecteList = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "demande_responsable")

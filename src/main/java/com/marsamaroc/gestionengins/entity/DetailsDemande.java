@@ -13,6 +13,7 @@ public class DetailsDemande implements Serializable {
     @Id
     Long id;
     @ManyToOne
+    @JoinColumn(name = "demande_numbci")
     Demande demande;
     @ManyToOne
     Famille famille;
